@@ -13,7 +13,7 @@ const ERRORS: Record<string, string> = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ erro?: string }>;
+  searchParams: Promise<{ erro?: string; detalhe?: string }>;
 }) {
   const session = await readAppSession();
   if (session) {
@@ -23,7 +23,7 @@ export default async function LoginPage({
     }
   }
 
-  const { erro } = await searchParams;
+  const { erro, detalhe } = await searchParams;
   const settings = microsoftSettings();
   const message = erro ? ERRORS[erro] : "";
 
@@ -38,6 +38,7 @@ export default async function LoginPage({
         {message ? (
           <p className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-sm text-red-200">
             {message}
+            {detalhe ? <span className="mt-1 block text-red-300/80">{detalhe}</span> : null}
           </p>
         ) : null}
         {settings.ready ? (

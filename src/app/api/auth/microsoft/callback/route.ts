@@ -21,6 +21,10 @@ export async function GET(request: Request) {
   if (error) {
     dest.pathname = "/login";
     dest.searchParams.set("erro", "microsoft");
+    const detail = url.searchParams.get("error_description");
+    if (detail) {
+      dest.searchParams.set("detalhe", detail.slice(0, 240));
+    }
     return NextResponse.redirect(dest);
   }
   const code = url.searchParams.get("code");
