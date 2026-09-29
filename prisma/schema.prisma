@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Quem pode entrar. O Microsoft só confirma a identidade; papel e área ficam aqui.
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String   @default("")
+  microsoftId String   @default("")
+  /// admin | member | pending
+  role        String   @default("pending")
+  area        String   @default("")
+  createdAt   DateTime @default(now())
+}
+
+model IntCounter {
+  id    Int @id @default(1)
+  value Int @default(0)
+}
+
+model Demand {
+  id               String        @id @default(cuid())
+  intCode          String        @unique
+  title            String
+  tipoDemanda      String        @default("")
+  cliente          String        @default("")
+  nomeOportunidade String        @default("")
+  codigoProtheus   String        @default("")
+  prioridade            String @default("")
+  prioridadeJustificativa String @default("")
+  servicosContemplados    String @default("")
+  squadComercial          String @default("")
+  saSesArquitetura        String @default("")
+  busArquitetura          String @default("")
+  responsavelEmail        String @default("")
+  accountManagerEmail     String @default("")
+  retrabalhoMarcado       Boolean @default(false)
+  motivoCorrecao          String @default("")
+  descricaoAjuste         String @default("")
+  gerenteProjetosEmail    String @default("")
+  liderTecnicoEmail       String @default("")
+  statusInternalizacao    String @default("")
+  teveRetrabalho          Boolean @default(false)
+  comercialStatus       String
+  internalizado    Boolean       @default(false)
+  createdAt        DateTime      @default(now())
+  areaWorks        AreaWork[]
+  events           StatusEvent[]
+  comments         DemandComment[]
+}
+
+model DemandComment {
+  id        String   @id @default(cuid())
+  demandId  String
+  demand    Demand   @relation(fields: [demandId], references: [id])
+  author    String
+  body      String
+  area      String
+  createdAt DateTime @default(now())
+}
+
+model AreaWork {
+  id       String @id @default(cuid())
+  demandId String
+  demand   Demand @relation(fields: [demandId], references: [id])
+  area     String
+  status   String
+
+  ajustePara          String @default("")
+  ajusteJustificativa String @default("")
+
+  @@unique([demandId, area])
+}
+
+model StatusEvent {
+  id        String   @id @default(cuid())
+  demandId  String
+  demand    Demand   @relation(fields: [demandId], references: [id])
+  area      String
+  from      String
+  to        String
+  createdAt DateTime @default(now())
+}
+
+/// Catálogo no estilo das listas de lookup do SharePoint (serviço/BU/squad).
+model CatalogItem {
+  id       String           @id @default(cuid())
+  kind     String
+  code     String
+  label    String
+  contacts CatalogContact[]
+
+  @@unique([kind, code])
+}
+
+model CatalogContact {
+  id            String      @id @default(cuid())
+  catalogItemId String
+  catalogItem   CatalogItem @relation(fields: [catalogItemId], references: [id], onDelete: Cascade)
+  email         String
+  displayName   String      @default("")
+  role          String      @default("")
+}
+
+model NotificationLog {
+  id         String   @id @default(cuid())
+  demandId   String
+  intCode    String
+  area       String
+  fromStatus String
+  toStatus   String
+  recipients String
+  subject    String
+  body       String
+  channel    String
+  error      String   @default("")
+  createdAt  DateTime @default(now())
+}

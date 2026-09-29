@@ -1,0 +1,207 @@
+.ov-kit {
+  --ov-bg: #f4f5f7;
+  --ov-surface: #ffffff;
+  --ov-surface-muted: #f8f9fb;
+  --ov-border: #e4e7ec;
+  --ov-border-strong: #d0d5dd;
+  --ov-text: #101828;
+  --ov-text-secondary: #475467;
+  --ov-text-muted: #98a2b3;
+  --ov-primary: #101828;
+  --ov-primary-fg: #ffffff;
+  --ov-accent: #2e90fa;
+  --ov-accent-soft: #eff8ff;
+  --ov-accent-border: #b2ddff;
+  --ov-success: #12b76a;
+  --ov-success-soft: #ecfdf3;
+  --ov-success-border: #abefc6;
+  --ov-warning: #f79009;
+  --ov-warning-soft: #fffaeb;
+  --ov-warning-border: #fedf89;
+  --ov-danger: #f04438;
+  --ov-danger-soft: #fef3f2;
+  --ov-danger-border: #fecdca;
+  --ov-info: #2e90fa;
+  --ov-info-soft: #eff8ff;
+  --ov-info-border: #b2ddff;
+  --ov-cyan: #06aed4;
+  --ov-cyan-soft: #ecfdff;
+  --ov-cyan-border: #a5f0fc;
+  --ov-purple: #7a5af8;
+  --ov-purple-soft: #f4f3ff;
+  --ov-purple-border: #d9d6fe;
+  --ov-orange: #ef6820;
+  --ov-orange-soft: #fff4ed;
+  --ov-orange-border: #f9dbaf;
+  --ov-indigo: #3538cd;
+  --ov-indigo-soft: #eef4ff;
+  --ov-indigo-border: #c7d7fe;
+  --ov-neutral: #667085;
+  --ov-neutral-soft: #f2f4f7;
+  --ov-neutral-border: #d0d5dd;
+  --ov-disaster: #ee46bc;
+  --ov-radius-panel: 12px;
+  --ov-radius-control: 8px;
+  --ov-radius-pill: 999px;
+  --ov-font-display: var(--font-ov-mono), "JetBrains Mono", ui-monospace, monospace;
+  --ov-font-body: var(--font-ov-sans), "Lato", system-ui, sans-serif;
+  background: var(--ov-bg);
+  color: var(--ov-text);
+  font-family: var(--ov-font-body);
+}
+
+.ov-kit * {
+  box-sizing: border-box;
+}
+
+.ov-title {
+  font-family: var(--ov-font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.ov-title-underscore::after {
+  content: "_";
+  color: var(--ov-accent);
+}
+
+.ov-panel {
+  background: var(--ov-surface);
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-panel);
+  padding: 16px;
+}
+
+.ov-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--ov-radius-control);
+  font-family: var(--ov-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.ov-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ov-btn-primary {
+  background: var(--ov-primary);
+  color: var(--ov-primary-fg);
+}
+
+.ov-btn-secondary {
+  background: var(--ov-surface);
+  color: var(--ov-text);
+  border-color: var(--ov-border-strong);
+}
+
+.ov-btn-ghost {
+  background: transparent;
+  color: var(--ov-text);
+}
+
+.ov-btn-danger {
+  background: var(--ov-danger);
+  color: #fff;
+}
+
+.ov-input,
+.ov-select {
+  height: 36px;
+  width: 100%;
+  border: 1px solid var(--ov-border-strong);
+  border-radius: var(--ov-radius-control);
+  background: var(--ov-surface);
+  padding: 0 12px;
+  font-size: 14px;
+  color: var(--ov-text);
+  outline: none;
+}
+
+.ov-input:focus,
+.ov-select:focus {
+  border-color: var(--ov-primary);
+  box-shadow: 0 0 0 1px var(--ov-primary);
+}
+
+.ov-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--ov-radius-pill);
+  border: 1px solid;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ov-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.ov-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.ov-table th {
+  height: 40px;
+  padding: 0 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ov-text-muted);
+  border-bottom: 1px solid var(--ov-border);
+}
+
+.ov-table td {
+  height: 36px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ov-border);
+  color: var(--ov-text);
+}
+
+.ov-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ov-swatch {
+  border: 1px solid var(--ov-border);
+  border-radius: var(--ov-radius-control);
+  overflow: hidden;
+  background: var(--ov-surface);
+}
+
+.ov-swatch-chip {
+  height: 48px;
+}
+
+.ov-wire {
+  background: var(--ov-surface-muted);
+  border: 1px dashed var(--ov-border-strong);
+  border-radius: 6px;
+  color: var(--ov-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 4px 8px;
+}
