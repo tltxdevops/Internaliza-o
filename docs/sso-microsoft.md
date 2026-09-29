@@ -7,7 +7,7 @@ Login só com a conta Microsoft. O navegador não usa MSAL e não vê o client s
 Plataforma **Web**, tenant único da Teletex.
 
 - Local: `http://localhost:3000/api/auth/microsoft/callback`
-- Produção: `https://DOMINIO/auth/microsoft/callback`
+- Produção: `https://internaliza-o.vercel.app/api/auth/microsoft/callback`
 
 Esse valor tem que ser idêntico em `MICROSOFT_REDIRECT_URI` e no authorize/token.
 

@@ -1,3 +1,15 @@
+function publicOrigin() {
+  const explicit = process.env.PUBLIC_APP_ORIGIN?.trim().replace(/\/$/, "");
+  if (explicit) return explicit;
+  const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim()
+    .replace(/^https?:\/\//, "")
+    .replace(/\/$/, "");
+  if (productionHost) return `https://${productionHost}`;
+  const appUrl = process.env.APP_URL?.trim().replace(/\/$/, "");
+  if (appUrl) return appUrl;
+  return "http://localhost:3000";
+}
+
 export function microsoftSettings() {
   const tenantId = (
     process.env.MICROSOFT_TENANT_ID ||
@@ -15,13 +27,7 @@ export function microsoftSettings() {
     ""
   ).trim();
   const scope = (process.env.MICROSOFT_SCOPE || "openid profile email User.Read").trim();
-  const origin = (
-    process.env.PUBLIC_APP_ORIGIN ||
-    process.env.APP_URL ||
-    "http://localhost:3000"
-  )
-    .trim()
-    .replace(/\/$/, "");
+  const origin = publicOrigin();
   const redirectUri = (
     process.env.MICROSOFT_REDIRECT_URI ||
     `${origin}/api/auth/microsoft/callback`
